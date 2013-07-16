@@ -9,6 +9,7 @@ platform :jruby do
   gem "cuba"
   gem "rack"
   gem "tilt"
+  gem "docsplit"
   gem "tabula-extractor",github: "jazzido/tabula-extractor", :require => "tabula"
   gem "pdf_extract",github: "noahpryor/pdf_extract"
 
