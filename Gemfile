@@ -10,6 +10,7 @@ platform :jruby do
   gem "rack"
   gem "tilt"
   gem "docsplit"
+  gem "mizuno"
   gem "tabula-extractor",github: "jazzido/tabula-extractor", :require => "tabula"
   gem "pdf_extract",github: "noahpryor/pdf_extract"
 

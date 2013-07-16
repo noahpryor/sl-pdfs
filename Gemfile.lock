@@ -20,9 +20,13 @@ GEM
   specs:
     call-me (0.0.2.3)
       refining
+    childprocess (0.3.9)
+      ffi (~> 1.0, >= 1.0.11)
+    choice (0.1.6)
     cuba (3.1.0)
       rack
     docsplit (0.7.2)
+    ffi (1.9.0)
     ffi (1.9.0-java)
     ffi-extra (0.1.0)
       ffi
@@ -32,6 +36,11 @@ GEM
     iso-639 (0.1.0)
     jruby-jars (1.7.4)
     jruby-rack (1.1.13.2)
+    mizuno (0.6.6)
+      childprocess (>= 0.2.6)
+      choice (>= 0.1.0)
+      ffi (>= 1.0.0)
+      rack (>= 1.0.0)
     rack (1.5.2)
     rake (10.1.0)
     refining (0.0.5.5)
@@ -54,6 +63,8 @@ PLATFORMS
 
 DEPENDENCIES
   cuba
+  docsplit
+  mizuno
   pdf_extract!
   rack
   rake
