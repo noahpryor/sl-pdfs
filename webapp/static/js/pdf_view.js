@@ -54,6 +54,7 @@ Tabula.PDFView = Backbone.View.extend({
 
       //events for buttons on the follow-you-around bar.
       'click #multiselect-checkbox' : 'toggleMultiSelectMode',
+      'click #toggleOCR' : 'toggleOCR',
       'click #clear-all-selections': 'clear_all_selection',
       'click #restore-detected-tables': 'restore_detected_tables',
       'click #repeat-lassos': 'repeat_lassos',
@@ -106,7 +107,7 @@ Tabula.PDFView = Backbone.View.extend({
 
     initialize: function(){
       _.bindAll(this, 'render', 'createImgareaselects', 'getTablesJson', 'total_selections',
-                'toggleClearAllAndRestorePredetectedTablesButtons', 'toggleMultiSelectMode', 'query_all_data', 'toggleUseLines');
+                'toggleClearAllAndRestorePredetectedTablesButtons', 'toggleMultiSelectMode', 'toggleOCR', 'query_all_data', 'toggleUseLines');
       this.render();
     },
 
@@ -583,6 +584,7 @@ Tabula.PDFView = Backbone.View.extend({
                   y2: selection.y2 * scale,
                   page: $(img).data('page')
               };
+
               if(!this.noModalAfterSelect){
                 this.doQuery(this.PDF_ID, [coords]);
               }

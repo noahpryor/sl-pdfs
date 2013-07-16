@@ -17,6 +17,7 @@ class DetectTablesJob < Tabula::Background::Job
       at( (page_count + page_index) / 2, page_count, "auto-detecting tables...") #starting at 50%...
       clean_lines = Tabula::Ruling::clean_rulings(Tabula::LSD::detect_lines_in_pdf_page(file, page_index))
       page_areas = Tabula::TableGuesser::find_rects_from_lines(clean_lines)
+      puts page_areas.inspect
       page_areas.map!{|rect| rect.dims(:left, :top, :width, :height)}
     end
     File.open(output_dir + "/tables.json", 'w') do |f|
