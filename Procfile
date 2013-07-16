@@ -1,0 +1,1 @@
+web: bundle exec rackup --threadsafe --rackup -p $PORT -e $RACK_ENV
