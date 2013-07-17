@@ -9,7 +9,7 @@ require 'tempfile'
 require 'fileutils'
 
 require 'tabula' # tabula-extractor gem
-require 'pdf_extract'
+#require 'pdf_extract'
 
 require_relative './tabula_settings.rb'
 
