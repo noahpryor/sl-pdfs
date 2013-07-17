@@ -12,7 +12,7 @@ platform :jruby do
   gem "docsplit"
   gem "mizuno"
   gem "tabula-extractor",github: "jazzido/tabula-extractor", :require => "tabula"
-  gem "pdf_extract",github: "noahpryor/pdf_extract"
+  gem "pdf_extract", ">=0.5.0", :require => "pdf_extract"
 
  # gem "tabula-extractor", '>=0.6.4', :require => "tabula"
 

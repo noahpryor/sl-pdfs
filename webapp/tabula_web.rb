@@ -5,6 +5,7 @@ require 'cuba/render'
 require 'digest/sha1'
 require 'json'
 require 'csv'
+require 'pdf_extract'
 require 'tempfile'
 require 'fileutils'
 
