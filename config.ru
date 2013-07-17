@@ -1,6 +1,5 @@
 require_relative './webapp/tabula_settings.rb'
 require_relative './webapp/tabula_web.rb'
-jruby.rack.logging ="stdout"
 run Cuba
 
 

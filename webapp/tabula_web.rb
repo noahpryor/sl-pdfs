@@ -29,6 +29,8 @@ def is_valid_pdf?(path)
   File.open(path, 'r') { |f| f.read(4) } == '%PDF'
 end
 
+#file = File.new("test.log", 'a+')
+#file.sync = true
 
 STATIC_ROOT = defined?($servlet_context) ? \
                 File.join($servlet_context.getRealPath('/'), 'WEB-INF/webapp/static') : \
@@ -40,7 +42,6 @@ Cuba.use Rack::MethodOverride
 Cuba.use Rack::Static, root: STATIC_ROOT, urls: ["/css","/js", "/img", "/swf"]
 Cuba.use Rack::ContentLength
 Cuba.use Rack::Reloader
-
 Cuba.define do
 
   if TabulaSettings::ENABLE_DEBUG_METHODS
