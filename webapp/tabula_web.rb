@@ -7,7 +7,7 @@ require 'json'
 require 'csv'
 require 'tempfile'
 require 'fileutils'
-
+require 'rtesseract'
 require 'tabula' # tabula-extractor gem
 #require 'pdf_extract'
 
