@@ -7,6 +7,7 @@ require 'json'
 require 'csv'
 require 'tempfile'
 require 'fileutils'
+require 'mini_magick'
 require 'rtesseract'
 require 'tabula' # tabula-extractor gem
 #require 'pdf_extract'
@@ -173,8 +174,28 @@ Cuba.define do
                                               :page_index_job_uuid => page_index_job,
                                               :detect_tables_job_uuid => detect_tables_job,
                                               :output_dir => file_path,
-                                              :thumbnail_sizes => [560])
+                                              :thumbnail_sizes => [560,2048])
       res.redirect "/queue/#{upload_id}"
+    end
+    on "pdf/:file_id/ocr" do |file_id|
+      coords = JSON.load(req.params['coords'])
+
+      image_file = "document_2048_"+coords["page"].to_s+".png"
+      dimensions = {x: coords["x"], y: coords["y"],height:coords["height"], width: coords["width"] }
+      puts dimensions
+      image_path = File.join(TabulaSettings::DOCUMENTS_BASEPATH, file_id, image_file) 
+      mix_block = RTesseract::Mixed.new(image_path,{processor: 'mini_magick', areas: [dimensions]})
+      text = mix_block.to_s
+      coords["image_file"] = image_file
+      coords["image_text"] = text
+      coords["image_path"] = image_path
+      puts image_path
+    #  pdf_path = File.join(TabulaSettings::DOCUMENTS_BASEPATH, file_id, 'document.pdf')
+      message = {
+        test: "FEafa"
+      }
+      res['Content-Type'] = 'application/json'
+      res.write coords.to_json
     end
 
     on "pdf/:file_id/data" do |file_id|

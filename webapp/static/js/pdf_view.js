@@ -3,7 +3,7 @@
 Tabula = {};
 
 var clip = null;
-
+var imgAreaSelectAPIObj;
 $(document).ready(function() {
     ZeroClipboard.setMoviePath('/swf/ZeroClipboard.swf');
     clip = new ZeroClipboard.Client();
@@ -27,7 +27,7 @@ $(document).ready(function() {
       if (windowTop > topOffset && windowTop < footerTop) {
         this
           .css("position", "fixed")
-          .css("width", "15%")
+          .css("width", "35%")
           .css("top", 70);
       }
     }
@@ -54,6 +54,8 @@ Tabula.PDFView = Backbone.View.extend({
 
       //events for buttons on the follow-you-around bar.
       'click #multiselect-checkbox' : 'toggleMultiSelectMode',
+      'click #toggle-ocr' : 'toggleOCRMode',
+
       'click #clear-all-selections': 'clear_all_selection',
       'click #restore-detected-tables': 'restore_detected_tables',
       'click #repeat-lassos': 'repeat_lassos',
@@ -101,6 +103,8 @@ Tabula.PDFView = Backbone.View.extend({
     PDF_ID: window.location.pathname.split('/')[2],
     colors: ['#f00', '#0f0', '#00f', '#ffff00', '#FF00FF'],
     noModalAfterSelect: $('#multiselect-checkbox').is(':checked'),
+    OCRMode: $('#toggle-ocr').is(':checked'),
+    lastOCR: [{}],
     lastQuery: [{}],
     lastSelection: undefined,
 
@@ -118,6 +122,9 @@ Tabula.PDFView = Backbone.View.extend({
 
     toggleMultiSelectMode: function(){
       this.noModalAfterSelect = $('#multiselect-checkbox').is(':checked');
+    },
+    toggleOCRMode: function(){
+      this.OCRMode = $('#toggle-ocr').is(':checked');
     },
 
     moveSelectionsUp: function(){
@@ -433,7 +440,23 @@ Tabula.PDFView = Backbone.View.extend({
       $('a#chardin-help').text("Close Help");
       $("#multiselect-label").css("color", "black");
     },
+    doOCR: function(pdf_id, coords) {
+      raw = coords
+      scaled = {};
+      scaled["x"] = raw[0]["x1"]*(2048/560);
+      scaled["width"] = (raw[0]["x2"]-raw[0]["x1"])*(2048/560);
+      scaled["y"] = raw[0]["y1"]*(2048/560);
+      scaled["height"] = (raw[0]["y2"]-raw[0]["y1"])*(2048/560);
+      scaled["page"] = raw[0]["page"]
 
+      this.lastOCR = {coords: JSON.stringify(scaled)};
+      console.log(this.lastOCR);
+      $.post('/pdf/' + pdf_id + '/ocr',
+              this.lastOCR,
+              _.bind(function(data) {
+                console.log(data);
+              }, this));
+    },
     doQuery: function(pdf_id, coords) {
       $('#loading').css('left', ($(window).width() - 98) + 'px').css('visibility', 'visible');
 
@@ -583,7 +606,12 @@ Tabula.PDFView = Backbone.View.extend({
                   y2: selection.y2 * scale,
                   page: $(img).data('page')
               };
-              if(!this.noModalAfterSelect){
+              if(this.OCRMode){
+                selection.page = $(img).data('page')
+                console.log(selection);
+                this.doOCR(this.PDF_ID, [selection])
+              }
+              else if(!this.noModalAfterSelect){
                 this.doQuery(this.PDF_ID, [coords]);
               }
           }, this),
