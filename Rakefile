@@ -10,7 +10,7 @@ Warbler::Task.new("war",
     config.jar_extension = 'jar'
     config.webserver = "jetty"
     config.webxml.jruby.compat.version = "1.9"
-    config.webxml.jruby.rack.logging = "stderr"
+    config.webxml.jruby.rack.logging = "stdout"
     config.dirs = ['lib', 'webapp']
   }
 )

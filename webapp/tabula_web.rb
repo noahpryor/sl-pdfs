@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 require 'cuba'
 require 'cuba/render'
-
 require 'digest/sha1'
 require 'json'
 require 'csv'
@@ -11,7 +10,7 @@ require 'mini_magick'
 require 'rtesseract'
 require 'tabula' # tabula-extractor gem
 #require 'pdf_extract'
-
+require 'slogger'
 require_relative './tabula_settings.rb'
 
 unless File.directory?(TabulaSettings::DOCUMENTS_BASEPATH)
@@ -29,12 +28,11 @@ def is_valid_pdf?(path)
   File.open(path, 'r') { |f| f.read(4) } == '%PDF'
 end
 
-#file = File.new("test.log", 'a+')
-#file.sync = true
 
 STATIC_ROOT = defined?($servlet_context) ? \
                 File.join($servlet_context.getRealPath('/'), 'WEB-INF/webapp/static') : \
                 File.join(File.dirname(__FILE__), 'static')
+slogger = Slogger::Logger.new "sample_app", :debug, :local0
 
 Cuba.plugin Cuba::Render
 Cuba.settings[:render].store(:views, File.expand_path("views", File.dirname(__FILE__)))
@@ -42,6 +40,7 @@ Cuba.use Rack::MethodOverride
 Cuba.use Rack::Static, root: STATIC_ROOT, urls: ["/css","/js", "/img", "/swf"]
 Cuba.use Rack::ContentLength
 Cuba.use Rack::Reloader
+Cuba.use Slogger::Rack::RequestLogger, slogger
 Cuba.define do
 
   if TabulaSettings::ENABLE_DEBUG_METHODS
@@ -185,8 +184,10 @@ Cuba.define do
       dimensions = {x: coords["x"], y: coords["y"],height:coords["height"], width: coords["width"] }
       puts dimensions
       image_path = File.join(TabulaSettings::DOCUMENTS_BASEPATH, file_id, image_file) 
-      mix_block = RTesseract::Mixed.new(image_path,{processor: 'mini_magick', areas: [dimensions]})
+      img = MiniMagick::Image.open(image_path)
+      mix_block = RTesseract::Mixed.new(img.path,{processor: 'mini_magick', areas: [dimensions]})
       text = mix_block.to_s
+      File.unlink(img.path)
       coords["image_file"] = image_file
       coords["image_text"] = text
       coords["image_path"] = image_path

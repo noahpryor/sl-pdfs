@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project name="tabula" default="build" basedir=".">
 
+<project name="tabula" default="build" basedir=".">
   <property file="build.properties"/>
   <property name="build.dir" value="build"/>
   <property name="mac.dir" value="${build.dir}/mac" />
@@ -61,7 +61,7 @@
           <cp>tabula.jar</cp>
         </classPath>
         <jre minVersion="1.6.0" jdkPreference="preferJre" initialHeapSize="256" maxHeapSize="1024">
-          <opt>-Xms256M -Xmx1024M -Dfile.encoding=utf-8</opt>
+          <opt>-Xms256M -Xmx400M -Dfile.encoding=utf-8</opt>
         </jre>
         <versionInfo
             fileVersion="${full_version}"

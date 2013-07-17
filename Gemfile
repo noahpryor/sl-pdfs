@@ -11,6 +11,7 @@ platform :jruby do
   gem "tilt"
   gem "docsplit"
   gem "mizuno"
+  gem "slogger"
   gem "mini_magick"
   gem "tabula-extractor",github: "jazzido/tabula-extractor", :require => "tabula"
   gem 'rtesseract', github: "mimosz/rtesseract"

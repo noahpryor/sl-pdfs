@@ -36,6 +36,7 @@ GEM
     rake (10.1.0)
     rmagick4j (0.3.7)
     rubyzip (0.9.9)
+    slogger (0.0.10)
     subexec (0.2.3)
     tilt (1.4.1)
     trollop (2.0)
@@ -56,6 +57,7 @@ DEPENDENCIES
   rack
   rake
   rtesseract!
+  slogger
   tabula-extractor!
   tilt
   warbler
