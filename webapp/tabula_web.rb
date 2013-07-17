@@ -5,11 +5,11 @@ require 'cuba/render'
 require 'digest/sha1'
 require 'json'
 require 'csv'
-require 'pdf_extract'
 require 'tempfile'
 require 'fileutils'
 
 require 'tabula' # tabula-extractor gem
+require 'pdf_extract'
 
 require_relative './tabula_settings.rb'
 

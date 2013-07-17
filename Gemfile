@@ -11,6 +11,7 @@ platform :jruby do
   gem "tilt"
   gem "docsplit"
   gem "mizuno"
+  gem 'builder'
   gem "ffi-inline"
   gem "tabula-extractor",github: "jazzido/tabula-extractor", :require => "tabula"
   gem "pdf_extract", "~> 0.4.0",github: "noahpryor/pdf_extract", :require => "pdf_extract"
