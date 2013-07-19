@@ -188,23 +188,23 @@ Cuba.define do
       image_path = "test.png"
       image.write(image_path)
       puts File.open(image_path).size
-      begin 
+   #   begin 
         a = RTesseract.new(image_path,processor: 'mini_magick')
-      rescue 
-        begin 
-          a = RTesseract.new(image_path)
-        rescue 
-          a = ""
-        end
-      end
+   #   rescue 
+       # begin 
+       #   a = RTesseract.new(image_path)
+     #   rescue 
+         # a = ""
+      #  end
+    #  end
       puts a.to_s
-      begin 
-      dimensions = {x: coords["x"], y: coords["y"],height:coords["height"], width: coords["width"] }
-      puts dimensions
-      mix_block = RTesseract::Mixed.new(image_path,{processor: 'mini_magick', areas: [dimensions]})
-      rescue 
+   #   begin 
+     # dimensions = {x: coords["x"], y: coords["y"],height:coords["height"], width: coords["width"] }
+      #puts dimensions
+     # mix_block = RTesseract::Mixed.new(image_path,{processor: 'mini_magick', areas: [dimensions]})
+      #rescue 
       mix_block = "3"
-      end
+     # end
 
       text = mix_block.to_s
     #  File.unlink(img.path)
