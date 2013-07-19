@@ -16,7 +16,7 @@ platform :jruby do
   gem "tabula-extractor",github: "jazzido/tabula-extractor", :require => "tabula"
 #  gem "tesseract_bin", "~> 1.0.2"
  # gem 'tesseract-ocr'
- gem "rtesseract", github: "mimosz/rtesseract"
+# gem "rtesseract", github: "mimosz/rtesseract"
  # gem "tabula-extractor", '>=0.6.4', :require => "tabula"
  gem "rake"
 

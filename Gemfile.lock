@@ -5,13 +5,6 @@ GIT
     tabula-extractor (0.6.4-java)
       trollop (~> 2.0)
 
-GIT
-  remote: git://github.com/mimosz/rtesseract.git
-  revision: 7d0d591a86d350b4620f6f150504ab0f6d4dc710
-  specs:
-    rtesseract (0.0.13)
-      rmagick4j
-
 GEM
   remote: https://rubygems.org/
   specs:
@@ -21,7 +14,6 @@ GEM
     cuba (3.1.0)
       rack
     docsplit (0.7.2)
-    ffi (1.9.0)
     ffi (1.9.0-java)
     jruby-jars (1.7.4)
     jruby-rack (1.1.13.2)
@@ -34,7 +26,6 @@ GEM
       rack (>= 1.0.0)
     rack (1.5.2)
     rake (10.1.0)
-    rmagick4j (0.3.7)
     rubyzip (0.9.9)
     slogger (0.0.10)
     subexec (0.2.3)
@@ -56,7 +47,6 @@ DEPENDENCIES
   mizuno
   rack
   rake
-  rtesseract!
   slogger
   tabula-extractor!
   tilt
