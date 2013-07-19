@@ -187,9 +187,9 @@ Cuba.define do
       image =  MiniMagick::Image.open(url)
       image_path = "test.png"
       image.write(image_path)
-      puts File.open(image_path).size
+     # puts File.open(image_path).size
       begin 
-        a = RTesseract.new(image_path,processor: 'mini_magick')
+        a = RTesseract.new(image_path)
      rescue 
        # begin 
        #   a = RTesseract.new(image_path)
