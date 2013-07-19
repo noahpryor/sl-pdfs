@@ -7,7 +7,6 @@ require 'csv'
 require 'tempfile'
 require 'fileutils'
 require 'mini_magick'
-require 'rmagick4j'
 require 'rtesseract'
 require 'tabula' # tabula-extractor gem
 #require 'pdf_extract'
