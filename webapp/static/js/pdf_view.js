@@ -455,6 +455,9 @@ Tabula.PDFView = Backbone.View.extend({
       $.post('/pdf/' + pdf_id + '/ocr',
               this.lastOCR,
               _.bind(function(data) {
+                
+                $('.modal-body').html(data.image_text)
+                $('#myModal').modal();
                 console.log(data);
               }, this));
     },
