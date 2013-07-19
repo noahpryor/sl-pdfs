@@ -9,13 +9,12 @@ platform :jruby do
   gem "cuba"
   gem "rack"
   gem "tilt"
-  gem 'rmagick4j'
   gem "docsplit"
   gem "mizuno"
   gem "slogger"
   gem "mini_magick"
   gem "tabula-extractor",github: "jazzido/tabula-extractor", :require => "tabula"
-  gem 'rtesseract', github: "mimosz/rtesseract"
+  gem 'tesseract-ocr'
  # gem "tabula-extractor", '>=0.6.4', :require => "tabula"
  gem "rake"
 

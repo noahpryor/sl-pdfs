@@ -7,7 +7,7 @@ require 'csv'
 require 'tempfile'
 require 'fileutils'
 require 'mini_magick'
-require 'rtesseract'
+require 'tesseract'
 require 'tabula' # tabula-extractor gem
 #require 'pdf_extract'
 require 'slogger'
@@ -189,7 +189,14 @@ Cuba.define do
       image.write(image_path)
      # puts File.open(image_path).size
       begin 
-        a = RTesseract.new(image_path)
+      c = Tesseract::Engine.new {|e|
+        e.language  = :eng
+        e.blacklist = '|'
+      }
+
+     puts  a =c.text_for(image_path).strip # => 'ABC'
+
+     #   a = RTesseract.new(image_path)
      rescue 
        # begin 
        #   a = RTesseract.new(image_path)
