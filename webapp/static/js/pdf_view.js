@@ -452,7 +452,7 @@ Tabula.PDFView = Backbone.View.extend({
       console.log($("#page-"+scaled["page"])[0].src);
       this.lastOCR = {coords: JSON.stringify(scaled)};
       console.log(this.lastOCR);
-      $.post('/pdf/' + pdf_id + '/ocr',
+      $.post('http://54.227.236.13:8080/pdf/ocr',
               this.lastOCR,
               _.bind(function(data) {
                 

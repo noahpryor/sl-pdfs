@@ -177,6 +177,40 @@ Cuba.define do
                                               :thumbnail_sizes => [560,2048])
       res.redirect "/queue/#{upload_id}"
     end
+
+      on "pdf/ocr" do 
+        coords = JSON.load(req.params['coords'])
+        puts req.params
+      #  pdf_path = File.join(TabulaSettings::DOCUMENTS_BASEPATH, file_id, 'document_2048_1.png')
+
+        url = coords['url'].gsub("560","2048")
+        puts url 
+        image =  MiniMagick::Image.open(url)
+        image_path = "test.png"
+        image.write(image_path)
+        #begin 
+        dimensions = {x: coords["x"], y: coords["y"],height:coords["height"], width: coords["width"] }
+        #puts dimensions
+        mix_block = RTesseract::Mixed.new(image_path,{processor: 'mini_magick', areas: [dimensions]})
+        #rescue 
+       # mix_block = "3"
+       # end
+
+        text = mix_block.to_s
+      # q File.unlink(img.path)
+        puts mix_block
+        coords["image_file"] = image_path
+        coords["image_text"] = text
+        coords["image_path"] = image_path
+    #    puts image_path
+      #  pdf_path = File.join(TabulaSettings::DOCUMENTS_BASEPATH, file_id, 'document.pdf')
+        message = {
+          test: "FEafa"
+        }
+        res['Content-Type'] = 'application/json'
+        res.write coords.to_json
+      end
+
     on "pdf/:file_id/ocr" do |file_id|
       coords = JSON.load(req.params['coords'])
       puts req.params
