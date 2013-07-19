@@ -14,6 +14,7 @@ GEM
     cuba (3.1.0)
       rack
     docsplit (0.7.2)
+    ffi (1.9.0)
     ffi (1.9.0-java)
     jruby-jars (1.7.4)
     jruby-rack (1.1.13.2)
@@ -25,6 +26,8 @@ GEM
       ffi (>= 1.0.0)
       rack (>= 1.0.0)
     rack (1.5.2)
+    rack-cors (0.2.8)
+      rack
     rake (10.1.0)
     rubyzip (0.9.9)
     slogger (0.0.10)
@@ -46,6 +49,7 @@ DEPENDENCIES
   mini_magick
   mizuno
   rack
+  rack-cors
   rake
   slogger
   tabula-extractor!

@@ -3,6 +3,7 @@ require 'cuba'
 require 'cuba/render'
 require 'digest/sha1'
 require 'json'
+require 'rack/cors'
 require 'csv'
 require 'tempfile'
 require 'fileutils'
@@ -39,6 +40,12 @@ Cuba.use Rack::MethodOverride
 Cuba.use Rack::Static, root: STATIC_ROOT, urls: ["/css","/js", "/img", "/swf"]
 Cuba.use Rack::ContentLength
 Cuba.use Rack::Reloader
+Cuba.use Rack::Cors do
+  allow do
+    origins '*'
+    resource '*', :headers => :any, :methods => [:get, :post, :options]
+  end
+end
 Cuba.use Slogger::Rack::RequestLogger, slogger
 Cuba.define do
 
