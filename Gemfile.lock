@@ -21,7 +21,6 @@ GEM
     cuba (3.1.0)
       rack
     docsplit (0.7.2)
-    ffi (1.9.0)
     ffi (1.9.0-java)
     jruby-jars (1.7.4)
     jruby-rack (1.1.13.2)
@@ -56,6 +55,7 @@ DEPENDENCIES
   mizuno
   rack
   rake
+  rmagick4j
   rtesseract!
   slogger
   tabula-extractor!

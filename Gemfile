@@ -9,6 +9,7 @@ platform :jruby do
   gem "cuba"
   gem "rack"
   gem "tilt"
+  gem 'rmagick4j'
   gem "docsplit"
   gem "mizuno"
   gem "slogger"
