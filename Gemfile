@@ -13,7 +13,7 @@ platform :jruby do
   gem "mizuno"
   gem "slogger"
   gem "mini_magick"
-#  gem "tabula-extractor",github: "jazzido/tabula-extractor", :require => "tabula"
+  gem "tabula-extractor",github: "jazzido/tabula-extractor", :require => "tabula"
 #  gem "tesseract_bin", "~> 1.0.2"
  # gem 'tesseract-ocr'
  gem "rtesseract", github: "mimosz/rtesseract"
