@@ -35,10 +35,9 @@ slogger = Slogger::Logger.new "sample_app", :debug, :local0
 
 Cuba.plugin Cuba::Render
 Cuba.settings[:render].store(:views, File.expand_path("views", File.dirname(__FILE__)))
-Cuba.use Rack::MethodOverride
+#Cuba.use Rack::MethodOverride
 Cuba.use Rack::Static, root: STATIC_ROOT, urls: ["/css","/js", "/img", "/swf"]
 Cuba.use Rack::ContentLength
-Cuba.use Rack::Reloader
 Cuba.use Rack::Cors do
   allow do
     origins '*'
