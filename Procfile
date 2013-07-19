@@ -1,1 +1,1 @@
-web: bundle exec rackup -s mizuno -p $PORT
+web: rackup -s mizuno -p $PORT
