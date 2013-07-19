@@ -188,7 +188,7 @@ Cuba.define do
       image_path = "test.png"
       image.write(image_path)
       #begin 
-     # dimensions = {x: coords["x"], y: coords["y"],height:coords["height"], width: coords["width"] }
+      dimensions = {x: coords["x"], y: coords["y"],height:coords["height"], width: coords["width"] }
       #puts dimensions
       mix_block = RTesseract::Mixed.new(image_path,{processor: 'mini_magick', areas: [dimensions]})
       #rescue 
@@ -196,7 +196,7 @@ Cuba.define do
      # end
 
       text = mix_block.to_s
-    #  File.unlink(img.path)
+    # q File.unlink(img.path)
       puts mix_block
       coords["image_file"] = image_path
       coords["image_text"] = text
