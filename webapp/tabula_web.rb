@@ -7,7 +7,6 @@ require 'rack/cors'
 require 'csv'
 require 'tempfile'
 require 'fileutils'
-require 'mini_magick'
 require 'tabula' # tabula-extractor gem
 #require 'pdf_extract'
 require 'slogger'
