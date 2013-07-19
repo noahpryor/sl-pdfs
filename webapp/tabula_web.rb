@@ -7,7 +7,7 @@ require 'csv'
 require 'tempfile'
 require 'fileutils'
 require 'mini_magick'
-require 'tesseract'
+require 'rtesseract'
 require 'tabula' # tabula-extractor gem
 #require 'pdf_extract'
 require 'slogger'
@@ -187,35 +187,17 @@ Cuba.define do
       image =  MiniMagick::Image.open(url)
       image_path = "test.png"
       image.write(image_path)
-     # puts File.open(image_path).size
-      begin 
-      c = Tesseract::Engine.new {|e|
-        e.language  = :eng
-        e.blacklist = '|'
-      }
-
-     puts  a =c.text_for(image_path).strip # => 'ABC'
-
-     #   a = RTesseract.new(image_path)
-     rescue 
-       # begin 
-       #   a = RTesseract.new(image_path)
-     #   rescue 
-          a = ""
-     end
-      #  end
-    #  end
-      puts a.to_s
       #begin 
      # dimensions = {x: coords["x"], y: coords["y"],height:coords["height"], width: coords["width"] }
       #puts dimensions
-     # mix_block = RTesseract::Mixed.new(image_path,{processor: 'mini_magick', areas: [dimensions]})
+      mix_block = RTesseract::Mixed.new(image_path,{processor: 'mini_magick', areas: [dimensions]})
       #rescue 
      # mix_block = "3"
      # end
 
-      text = a.to_s
+      text = mix_block.to_s
     #  File.unlink(img.path)
+      puts mix_block
       coords["image_file"] = image_path
       coords["image_text"] = text
       coords["image_path"] = image_path
