@@ -448,7 +448,8 @@ Tabula.PDFView = Backbone.View.extend({
       scaled["y"] = raw[0]["y1"]*(2048/560);
       scaled["height"] = (raw[0]["y2"]-raw[0]["y1"])*(2048/560);
       scaled["page"] = raw[0]["page"]
-
+      scaled["url"] = $("#page-"+scaled["page"])[0].src
+      console.log($("#page-"+scaled["page"])[0].src);
       this.lastOCR = {coords: JSON.stringify(scaled)};
       console.log(this.lastOCR);
       $.post('/pdf/' + pdf_id + '/ocr',
