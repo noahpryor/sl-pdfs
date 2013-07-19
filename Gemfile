@@ -8,14 +8,15 @@ ruby '1.9.3', engine: 'jruby', engine_version: '1.7.3'
 platform :jruby do
   gem "cuba"
   gem "rack"
-  gem 'rack-cors'
   gem "tilt"
+  gem "docsplit"
   gem "mizuno"
   gem "slogger"
+  gem "mini_magick"
   gem "tabula-extractor",github: "jazzido/tabula-extractor", :require => "tabula"
 #  gem "tesseract_bin", "~> 1.0.2"
  # gem 'tesseract-ocr'
-# gem "rtesseract", github: "mimosz/rtesseract"
+ gem "rtesseract", github: "mimosz/rtesseract"
  # gem "tabula-extractor", '>=0.6.4', :require => "tabula"
  gem "rake"
 
