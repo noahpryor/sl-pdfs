@@ -37,6 +37,7 @@ slogger = Slogger::Logger.new "sample_app", :debug, :local0
 
 Cuba.plugin Cuba::Render
 Cuba.settings[:render].store(:views, File.expand_path("views", File.dirname(__FILE__)))
+
 #Cuba.use Rack::MethodOverride
 Cuba.use Rack::Static, root: STATIC_ROOT, urls: ["/css","/js", "/img", "/swf"]
 Cuba.use Rack::ContentLength
@@ -214,6 +215,8 @@ Cuba.define do
         message = {
           test: "FEafa"
         }
+       res['Access-Control-Allow-Origin'] = '*'
+       res['Access-Control-Request-Method'] = *
         res['Content-Type'] = 'application/json'
         res.write coords.to_json
       end
@@ -247,6 +250,8 @@ Cuba.define do
       message = {
         test: "FEafa"
       }
+      res['Access-Control-Allow-Origin'] = '*'
+      res['Access-Control-Request-Method'] = "*"
       res['Content-Type'] = 'application/json'
       res.write coords.to_json
     end
