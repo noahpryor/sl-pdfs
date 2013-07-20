@@ -20,7 +20,7 @@ platform :jruby do
  # gem "tabula-extractor", '>=0.6.4', :require => "tabula"
  gem "rake"
  gem "warbler"
-
+ gem 'rack-cors', :require => 'rack/cors'
   group :development do
     gem "warbler"
   end
