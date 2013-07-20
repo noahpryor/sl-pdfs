@@ -8,6 +8,8 @@ require 'csv'
 require 'tempfile'
 require 'fileutils'
 require 'tabula' # tabula-extractor gem
+require 'rtesseract'
+require 'mini_magick'
 #require 'pdf_extract'
 require 'slogger'
 require_relative './tabula_settings.rb'
@@ -38,6 +40,7 @@ Cuba.settings[:render].store(:views, File.expand_path("views", File.dirname(__FI
 #Cuba.use Rack::MethodOverride
 Cuba.use Rack::Static, root: STATIC_ROOT, urls: ["/css","/js", "/img", "/swf"]
 Cuba.use Rack::ContentLength
+Cuba.use Rack::Reloader
 Cuba.use Rack::Cors do
   allow do
     origins '*'
