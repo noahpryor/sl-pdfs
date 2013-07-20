@@ -19,6 +19,7 @@ platform :jruby do
  gem "rtesseract", github: "mimosz/rtesseract"
  # gem "tabula-extractor", '>=0.6.4', :require => "tabula"
  gem "rake"
+ gem "warbler"
 
   group :development do
     gem "warbler"
