@@ -192,13 +192,13 @@ Cuba.define do
 
         url = coords['url'].gsub("560","2048")
         puts url 
-   #     image =  MiniMagick::Image.open(url)
+       image =  MiniMagick::Image.open(url)
         image_path = "test.png"
         image.write(image_path)
         #begin 
         dimensions = {x: coords["x"], y: coords["y"],height:coords["height"], width: coords["width"] }
         #puts dimensions
-      #  mix_block = RTesseract::Mixed.new(image_path,{processor: 'mini_magick', areas: [dimensions]})
+        mix_block = RTesseract::Mixed.new(image_path,{processor: 'mini_magick', areas: [dimensions]})
         #rescue 
        # mix_block = "3"
        # end
