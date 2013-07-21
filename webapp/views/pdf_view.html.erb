@@ -48,8 +48,21 @@
         <br /><input type="checkbox" id="multiselect-checkbox"> <label id="multiselect-label" for="multiselect-checkbox" data-position="bottom" data-intro="After you select each table on the page, a data preview window appears. If you want to select multiple tables without interruption, check this box to suppress the preview window.">Multi-Select Mode <a class="tooltip-modal" href="#" data-placement="left" data-toggle="tooltip" title="Check this to select multiple tables without their extracted data appearing afterwards." ><i class="icon-question-sign" ></i></a></label>
         <br>
         <input type="checkbox" id="toggle-ocr"> <label id="toggle-ocr-label" for="toggle-ocr" data-position="bottom" data-intro="Select with OCR.">Select with OCR <a class="tooltip-modal" href="#" data-placement="left" data-toggle="tooltip" title="select with ocr." ><i class="icon-question-sign" ></i></a></label>
+        <h4>Preview</h4>
+        <div id="preview-container">
+          <ul id="preview-list">
+          </ul>
+
+
+          <button id="save-template" class="btn btn-primary">
+            Save Template
+          </button>
+
+        </div>
         <br />
+        
         <a href="#" id="chardin-help">Help</a>
+        
       </div>
     </div> <!-- followyouaround bar container -->
   </div>
@@ -64,6 +77,11 @@
     <p>One fine body…</p>
   </div>
   <div class="modal-footer" style="position: relative">
+    <label for="selection-name" id="selection-name-label">
+          Name:
+          <input type="text" id="selection-name">
+    </label> 
+
     <p>
       <input type="checkbox" id="use_lines">
       <label for="use_lines" id="use-lines-label">
@@ -72,6 +90,9 @@
     <span style="display: none;">Copied!</span>
     <button id="close-modal" class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
     <button class="btn btn-primary" id="copy-csv-to-clipboard">Copy to clipboard as CSV</button>
+    <button class="btn btn-secondary" id="add-to-template">
+        Add to Temp
+    </button>
     <div class="btn-group">
       <form id="download-form" action="#changedinJS" method="post">
         <div id="hidden-fields">
@@ -88,7 +109,7 @@
     </div>
 </div>
 <script type="text/javascript" src="/js/chardinjs.min.js"></script>
-
+<script type='text/javascript' src='https://cdn.firebase.com/v0/firebase.js'></script>
 <script type="text/javascript" src="/js/ZeroClipboard.js"></script>
 <script type="text/javascript" src="/js/table2CSV.js"></script>
-<script type="text/javascript" src="/js/pdf_view.js?1365633567"></script> <!-- cachebuster: last update time of JS. -->
+<script type="text/javascript" src="/js/pdf_view.js?13656335167"></script> <!-- cachebuster: last update time of JS. -->

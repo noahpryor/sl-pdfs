@@ -36,6 +36,7 @@ STATIC_ROOT = defined?($servlet_context) ? \
 slogger = Slogger::Logger.new "sample_app", :debug, :local0
 
 Cuba.plugin Cuba::Render
+#Cuba.settings[:render][:template_engine] = "haml"
 Cuba.settings[:render].store(:views, File.expand_path("views", File.dirname(__FILE__)))
 
 #Cuba.use Rack::MethodOverride

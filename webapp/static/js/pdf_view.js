@@ -4,13 +4,16 @@ Tabula = {};
 
 var clip = null;
 var imgAreaSelectAPIObj;
+var user_id = 1
+var firebase_root = new Firebase('https://myprojectname.firebaseIO-demo.com/pdfs/users');
+var user_db = firebase_root.child(user_id)
 $(document).ready(function() {
     ZeroClipboard.setMoviePath('/swf/ZeroClipboard.swf');
     clip = new ZeroClipboard.Client();
 
     clip.on('mousedown', function(client) {
         client.setText($('table').table2CSV({delivery: null}));
-        $('#myModal span').css('display', 'inline').delay(900).fadeOut('slow');
+        $('#myModal span').css('display', 'inline').delay(100).fadeOut('fast');
     });
 });
 
@@ -46,7 +49,6 @@ Tabula.PDFView = Backbone.View.extend({
       'load .thumbnail-list li img': function() { $(this).after($('<div />', { class: 'selection-show'})); },
       'click i.icon-remove': 'deletePage',
       'click i.rotate-left i.rotate-right': 'rotatePage',
-
       //events related to the chardin help library.
       'click a#chardin-help': 'fire_chardin_event',
       'chardinJs:stop body' : 'chardin_stop',
@@ -54,16 +56,15 @@ Tabula.PDFView = Backbone.View.extend({
 
       //events for buttons on the follow-you-around bar.
       'click #multiselect-checkbox' : 'toggleMultiSelectMode',
+      'click #save-template':'saveTemplate',
       'click #toggle-ocr' : 'toggleOCRMode',
-
+      'click #add-to-template' : 'addDataToTemplate',
       'click #clear-all-selections': 'clear_all_selection',
       'click #restore-detected-tables': 'restore_detected_tables',
       'click #repeat-lassos': 'repeat_lassos',
       'click #all-data': 'query_all_data',
     },
-
     rotatePage: function(t) {
-
     },
 
     deletePage: function(t) {
@@ -98,16 +99,16 @@ Tabula.PDFView = Backbone.View.extend({
                });
 
     },
-
-
+    db: user_db,
+    template_db: user_db.child('templates'),
     PDF_ID: window.location.pathname.split('/')[2],
     colors: ['#f00', '#0f0', '#00f', '#ffff00', '#FF00FF'],
     noModalAfterSelect: $('#multiselect-checkbox').is(':checked'),
     OCRMode: $('#toggle-ocr').is(':checked'),
     lastOCR: [{}],
+    allQueries: [],
     lastQuery: [{}],
     lastSelection: undefined,
-
     initialize: function(){
       _.bindAll(this, 'render', 'createImgareaselects', 'getTablesJson', 'total_selections',
                 'toggleClearAllAndRestorePredetectedTablesButtons', 'toggleMultiSelectMode', 'query_all_data', 'toggleUseLines');
@@ -122,6 +123,32 @@ Tabula.PDFView = Backbone.View.extend({
 
     toggleMultiSelectMode: function(){
       this.noModalAfterSelect = $('#multiselect-checkbox').is(':checked');
+    },
+    addDataToTemplate: function(){
+      name = $("#selection-name").val()
+      if (this.OCRMode == true) {
+        var kind = 'ocr';
+        var last_selection = this.lastOCR;
+      }
+      else {
+        kind = 'table'
+        last_selection = this.lastQuery;
+      }
+      item = {
+        kind: kind,
+        selection: last_selection,
+        name: $("#selection-name").val()
+      }
+      list_object = $("<li>").text(name)
+      console.log(list_object);
+
+      $("#preview-list").append(list_object);
+      this.allQueries.push(item)
+      $('#myModal').modal('hide');
+    },
+    saveTemplate: function(){
+      console.log(this.allQueries);
+      this.template_db.push(this.allQueries)
     },
     toggleOCRMode: function(){
       this.OCRMode = $('#toggle-ocr').is(':checked');
@@ -206,18 +233,6 @@ Tabula.PDFView = Backbone.View.extend({
                           fromCenter: false
                       });
                   }, this));
-
-                  // draw lines connecting clusters (edges)
-                  // $.each(data, function(i, row) {
-                  //     $(newCanvas).drawRect({
-                  //         x: lastSelection.x1,
-                  //         y: row.top * scale_y,
-                  //         width: lastSelection.x2 - lastSelection.x1,
-                  //         height: row.bottom - row.top,
-                  //         strokeStyle: this.colors[i % this.colors.length],
-                  //         fromCenter: false
-                  //     });
-                  // });
               }, this));
     },
 
