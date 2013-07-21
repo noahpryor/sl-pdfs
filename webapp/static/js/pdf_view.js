@@ -5,7 +5,7 @@ Tabula = {};
 var clip = null;
 var imgAreaSelectAPIObj;
 var user_id = 1
-var firebase_root = new Firebase('https://myprojectname.firebaseIO-demo.com/pdfs/users');
+var firebase_root = new Firebase('https://schlepless.firebaseio.com/pdfs/users');
 var user_db = firebase_root.child(user_id)
 $(document).ready(function() {
     ZeroClipboard.setMoviePath('/swf/ZeroClipboard.swf');
